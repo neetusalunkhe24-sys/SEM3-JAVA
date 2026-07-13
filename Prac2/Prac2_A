@@ -1,0 +1,66 @@
+package javaprac2_a;
+
+abstract class Calculator{
+    
+    abstract double operation(double x, double y);
+    
+    void showResult(String operationName, double result){
+        System.out.println(operationName + "=" + result);
+    }
+}
+
+class Add extends Calculator{
+    @Override
+    double operation(double x, double y)
+    {
+        return x + y;
+       
+    }
+}
+
+class Subtract extends Calculator{
+    @Override
+    double operation(double x, double y)
+    {
+        return x - y;
+    }
+}
+
+class Multiply extends Calculator{
+    @Override
+    double operation(double x, double y)
+    {
+        return x * y;
+    }
+}
+
+class Divide extends Calculator{
+    @Override
+    double operation(double x, double y)
+    {
+        if (y == 0){
+            throw new ArithmeticException("Cannot divide by zero");
+        }
+        return x / y;
+    }
+}
+
+public class JavaPrac2_A{
+    
+    public static void main(String[] args)
+    {
+        double num1 = 50;
+        double num2 = 25;
+        
+        Calculator add = new Add();
+        Calculator sub = new Subtract();
+        Calculator mul = new Multiply();
+        Calculator div = new Divide(); 
+        
+        add.showResult("Addition", add.operation(num1, num2));
+        sub.showResult("Subtraction", sub.operation(num1, num2));
+        mul.showResult("Multiply", mul.operation(num1, num2));
+        div.showResult("Division", div.operation(num1, num2)); 
+            
+    }
+}
