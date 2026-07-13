@@ -1,0 +1,54 @@
+package javaprac2_b;
+
+interface Arithmetic {
+
+    int sum(int a, int b);
+
+    int difference(int a, int b);
+
+    int product(int a, int b);
+
+    double quotient(int a, int b);
+}
+
+class MyCalculator implements Arithmetic {
+
+    @Override
+    public int sum(int a, int b) {
+        return a + b;
+    }
+
+    @Override
+    public int difference(int a, int b) {
+        return a - b;
+    }
+
+    @Override
+    public int product(int a, int b) {
+        return a * b;
+    }
+
+    @Override
+    public double quotient(int a, int b) {
+        if (b == 0) {
+            throw new ArithmeticException("Cannot divide by zero.");
+        }
+        return (double) a / b;
+    }
+}
+
+public class JavaPrac2_B {
+
+    public static void main(String[] args) {
+
+        Arithmetic calc = new MyCalculator();
+
+        int num1 = 24;
+        int num2 = 6;
+
+        System.out.println("Sum = " + calc.sum(num1, num2));
+        System.out.println("Difference = " + calc.difference(num1, num2));
+        System.out.println("Product = " + calc.product(num1, num2));
+        System.out.println("Quotient = " + calc.quotient(num1, num2));
+    }
+}
