@@ -1,0 +1,113 @@
+package com.mycompany.prac_4;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
+import java.util.Map;
+import java.util.Iterator;
+
+public class Prac_4 {
+
+    public static void main(String[] args) {
+
+        // a. Demonstrating List Interface (using ArrayList)
+        System.out.println("----- List Interface -----");
+
+        List<String> books = new ArrayList<>();
+
+        // Basic List operations
+        books.add("Java");
+        books.add("Python");
+        books.add("C++");
+        books.add("Java"); // Duplicate allowed
+
+        System.out.println("Initial List: " + books);
+
+        books.add(1, "HTML");
+        System.out.println("After adding HTML at index 1: " + books);
+
+        System.out.println("First Book: " + books.get(0));
+
+        books.set(2, "JavaScript");
+        System.out.println("After updating index 2: " + books);
+
+        books.remove("Java");
+        System.out.println("After removing first Java: " + books);
+
+        books.remove(books.size() - 1);
+        System.out.println("After removing last element: " + books);
+
+        System.out.println("Index of C++: " + books.indexOf("C++"));
+        System.out.println("Contains Python? " + books.contains("Python"));
+        System.out.println("List Size: " + books.size());
+
+        books.clear();
+        System.out.println("List after clear(): " + books);
+
+
+        // b. Demonstrating Set Interface (using HashSet)
+        System.out.println("\n----- Set Interface -----");
+
+        Set<String> cities = new HashSet<>();
+
+        cities.add("Mumbai");
+        cities.add("Pune");
+        cities.add("Delhi");
+        cities.add("Mumbai"); // Duplicate not allowed
+
+        System.out.println("Initial Set: " + cities);
+
+        cities.remove("Pune");
+        System.out.println("After removing Pune: " + cities);
+
+        System.out.println("Contains Delhi? " + cities.contains("Delhi"));
+        System.out.println("Set Size: " + cities.size());
+        System.out.println("Is Set Empty? " + cities.isEmpty());
+
+        System.out.print("Cities in Set: ");
+        Iterator<String> itr = cities.iterator();
+        while (itr.hasNext()) {
+            System.out.print(itr.next() + " ");
+        }
+        System.out.println();
+
+        Set<String> moreCities = new HashSet<>();
+        moreCities.add("Chennai");
+        moreCities.add("Delhi");
+
+        cities.addAll(moreCities);
+        System.out.println("After addAll(): " + cities);
+
+
+        // c. Demonstrating Map Interface (using HashMap)
+        System.out.println("\n----- Map Interface -----");
+
+        Map<Integer, String> employees = new HashMap<>();
+
+        employees.put(101, "Amit");
+        employees.put(102, "Neha");
+        employees.put(103, "Rahul");
+        employees.put(101, "Riya"); // Updates value
+
+        System.out.println("Initial Map: " + employees);
+
+        System.out.println("Employee with ID 102: " + employees.get(102));
+
+        employees.remove(103);
+        System.out.println("After removing ID 103: " + employees);
+
+        System.out.println("Contains Key 102? " + employees.containsKey(102));
+        System.out.println("Contains Value Riya? " + employees.containsValue("Riya"));
+
+        System.out.println("Keys: " + employees.keySet());
+        System.out.println("Values: " + employees.values());
+        System.out.println("Entries: " + employees.entrySet());
+
+        System.out.println("Map Size: " + employees.size());
+
+        employees.clear();
+        System.out.println("Map after clear(): " + employees);
+    }
+}
