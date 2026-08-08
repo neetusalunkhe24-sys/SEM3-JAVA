@@ -1,0 +1,229 @@
+package practical5;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Practical5 extends JFrame implements ActionListener {
+
+    JTextField nameField, emailField, phoneField, addressField, dobField;
+    JRadioButton male, female, other;
+    JComboBox<String> educationCombo;
+    JCheckBox java, python, cpp, html;
+    JTextArea summaryArea;
+    JButton submitButton, clearButton;
+
+    public Practical5() {
+
+        setTitle("My Resume (S109)");
+        setSize(550, 750);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        // Main Panel with green background
+        JPanel mainPanel = new JPanel(new GridLayout(11, 2, 10, 10));
+        mainPanel.setBackground(new Color(204, 255, 204));
+        mainPanel.setBorder(
+                BorderFactory.createEmptyBorder(20, 20, 20, 20)
+        );
+
+        // Title
+        JLabel title = new JLabel("My Resume (S109)", JLabel.CENTER);
+        title.setFont(new Font("Arial", Font.BOLD, 20));
+        title.setForeground(new Color(0, 128, 0));
+
+        JPanel titlePanel = new JPanel(new BorderLayout());
+        titlePanel.setBackground(new Color(204, 255, 204));
+        titlePanel.add(title);
+
+        add(titlePanel, BorderLayout.NORTH);
+
+        // Full Name
+        mainPanel.add(new JLabel("Full Name:"));
+        nameField = new JTextField();
+        mainPanel.add(nameField);
+
+        // Gender
+        mainPanel.add(new JLabel("Gender:"));
+
+        JPanel genderPanel = new JPanel();
+        genderPanel.setBackground(new Color(204, 255, 204));
+
+        male = new JRadioButton("Male");
+        female = new JRadioButton("Female");
+        other = new JRadioButton("Other");
+
+        ButtonGroup genderGroup = new ButtonGroup();
+        genderGroup.add(male);
+        genderGroup.add(female);
+        genderGroup.add(other);
+
+        genderPanel.add(male);
+        genderPanel.add(female);
+        genderPanel.add(other);
+
+        mainPanel.add(genderPanel);
+
+        // Date of Birth
+        mainPanel.add(new JLabel("Date of Birth (dd/mm/yyyy):"));
+        dobField = new JTextField();
+        mainPanel.add(dobField);
+
+        // Email
+        mainPanel.add(new JLabel("Email:"));
+        emailField = new JTextField();
+        mainPanel.add(emailField);
+
+        // Phone Number
+        mainPanel.add(new JLabel("Phone Number:"));
+        phoneField = new JTextField();
+        mainPanel.add(phoneField);
+
+        // Address
+        mainPanel.add(new JLabel("Address:"));
+        addressField = new JTextField();
+        mainPanel.add(addressField);
+
+        // Education
+        mainPanel.add(new JLabel("Education:"));
+
+        String[] degrees = {
+            "High School",
+            "Diploma",
+            "BSc",
+            "BCA",
+            "BCS",
+            "MCA",
+            "MSc"
+        };
+
+        educationCombo = new JComboBox<>(degrees);
+        mainPanel.add(educationCombo);
+
+        // Skills
+        mainPanel.add(new JLabel("Skills:"));
+
+        JPanel skillsPanel = new JPanel(
+                new FlowLayout(FlowLayout.LEFT)
+        );
+        skillsPanel.setBackground(new Color(204, 255, 204));
+
+        java = new JCheckBox("Java");
+        python = new JCheckBox("Python");
+        cpp = new JCheckBox("C++");
+        html = new JCheckBox("HTML/CSS");
+
+        skillsPanel.add(java);
+        skillsPanel.add(python);
+        skillsPanel.add(cpp);
+        skillsPanel.add(html);
+
+        mainPanel.add(skillsPanel);
+
+        // Summary
+        mainPanel.add(new JLabel("Resume Summary:"));
+
+        summaryArea = new JTextArea(4, 20);
+        JScrollPane scrollPane = new JScrollPane(summaryArea);
+        mainPanel.add(scrollPane);
+
+        // Buttons
+        submitButton = new JButton("Submit");
+        clearButton = new JButton("Clear");
+
+        submitButton.setBackground(new Color(102, 204, 102));
+        clearButton.setBackground(new Color(255, 153, 153));
+
+        mainPanel.add(submitButton);
+        mainPanel.add(clearButton);
+
+        submitButton.addActionListener(this);
+        clearButton.addActionListener(this);
+
+        add(mainPanel, BorderLayout.CENTER);
+
+        setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == submitButton) {
+
+            String name = nameField.getText();
+            String dob = dobField.getText();
+
+            String gender =
+                    male.isSelected() ? "Male" :
+                    female.isSelected() ? "Female" :
+                    other.isSelected() ? "Other" :
+                    "Not Selected";
+
+            String email = emailField.getText();
+            String phone = phoneField.getText();
+            String address = addressField.getText();
+
+            String education =
+                    (String) educationCombo.getSelectedItem();
+
+            String skills = "";
+
+            if (java.isSelected())
+                skills += "Java ";
+
+            if (python.isSelected())
+                skills += "Python ";
+
+            if (cpp.isSelected())
+                skills += "C++ ";
+
+            if (html.isSelected())
+                skills += "HTML/CSS ";
+
+            String summary = summaryArea.getText();
+
+            String message =
+                    "Resume Submitted Successfully!\n" +
+                    "Name: " + name + "\n" +
+                    "DOB: " + dob + "\n" +
+                    "Gender: " + gender + "\n" +
+                    "Email: " + email + "\n" +
+                    "Phone: " + phone + "\n" +
+                    "Address: " + address + "\n" +
+                    "Education: " + education + "\n" +
+                    "Skills: " + skills + "\n" +
+                    "Summary: " + summary;
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    message,
+                    "Resume Submitted",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+
+        } else if (e.getSource() == clearButton) {
+
+            nameField.setText("");
+            emailField.setText("");
+            phoneField.setText("");
+            addressField.setText("");
+            dobField.setText("");
+            summaryArea.setText("");
+
+            male.setSelected(false);
+            female.setSelected(false);
+            other.setSelected(false);
+
+            educationCombo.setSelectedIndex(0);
+
+            java.setSelected(false);
+            python.setSelected(false);
+            cpp.setSelected(false);
+            html.setSelected(false);
+        }
+    }
+
+    public static void main(String[] args) {
+        new Practical5();
+    }
+}
